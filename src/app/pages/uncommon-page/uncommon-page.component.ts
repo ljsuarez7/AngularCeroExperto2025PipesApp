@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CardComponent } from "../../components/card/card.component";
 import { AsyncPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { interval, map, tap } from 'rxjs';
 
 const client1 = {
   name: 'Fernando',
@@ -71,13 +72,19 @@ export default class UncommonPageComponent {
     address: 'Ottawa, Canadá'
   }
 
-  //AsyncPipe
+  //AsyncPipe con promesas
   promiseValue: Promise<string> = new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject('Tenemos error en la promesa');
-      // resolve('Tenemos data en la promesa');
+      // reject('Tenemos error en la promesa');
+      resolve('Tenemos data en la promesa');
       console.log('Promesa finalizada');
     }, 3500);
   });
+
+  //AsyncPipe con observables
+  myObservableTimer = interval(2000).pipe(
+    map(value => value + 1),
+    tap(value => console.log('tap:', value))
+  );
 
 }

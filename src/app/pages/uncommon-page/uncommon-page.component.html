@@ -57,14 +57,26 @@
     </ul>
   </app-card>
 
-  <app-card title="AsyncPipe">
+  <app-card title="AsyncPipe con promesas">
 
-    <p>{{promiseValue | async}}</p>
+    <p>Sin validación: {{promiseValue | async}}</p>
 
     @if (promiseValue | async; as value) {
-      <p class="text-primary">{{value}}</p>
+      <p class="text-primary">Con validación: {{value}}</p>
     }@else {
       <p class="text-accent">Espere por favor...</p>
+    }
+
+  </app-card>
+
+  <app-card title="AsyncPipe con observables">
+
+    <p>Sin validación: {{myObservableTimer | async}}</p>
+
+    @if (myObservableTimer | async; as value) {
+      <p class="text-primary">Con validación: {{value}}</p>
+    }@else {
+      <p class="text-accent">Esperando primer valor...</p>
     }
 
   </app-card>
