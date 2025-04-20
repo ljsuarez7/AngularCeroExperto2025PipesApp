@@ -88,7 +88,7 @@
 <div class="flex flex-row gap-2">
 
   <h1 class="text-2xl font-bold">Locale Actual:
-    <span class="badge badge-secondary">{{currentLocale()}}</span>
+    <span class="badge badge-secondary">{{currentLocale() | uppercase }}</span>
   </h1>
 
   <button (click)="changeLocale('fr')" class="btn btn-primary">
