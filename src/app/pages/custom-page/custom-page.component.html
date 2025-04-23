@@ -50,8 +50,8 @@
             </span>
           </td>
           <td>
-            <span class="text-xs w-44" [style.color]="hero.color | heroColor">
-              {{hero.color | heroColor}}
+            <span class="text-xs w-44" [style.color]="hero.color | heroTextColor">
+              {{hero.color | heroColor | titlecase}}
             </span>
           </td>
           <td>{{hero.creator}}</td>
