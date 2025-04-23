@@ -15,13 +15,34 @@
 <div class="divider my-2"></div>
 
 <section class="mb-4">
-  <h1 class="text-2xl font-bold">Pipes personalizados en acción</h1>
-  <div class="flex gap-2 justify-end items-center w-full">
-    <p class="mr-4 text-accent font-semibold">Filtrar por:</p>
-    <button class="btn btn-primary">Nombre</button>
-    <button class="btn btn-accent">Puede volar</button>
-    <button class="btn btn-secondary">Color</button>
-    <button class="btn btn-info">Creador</button>
+  <div class="flex justify-between mb-4 mr-4">
+    <h1 class="text-2xl font-bold">Pipes personalizados en acción</h1>
+    <div>
+      <p class="text-lg font-semibold">Ordenado por <span class="text-primary">{{sortBy()}}</span></p>
+      <p class="text-lg font-semibold">Filtrado por <span class="text-accent">{{searchQuery()}}</span></p>
+    </div>
+  </div>
+  <div class="flex gap-2 justify-between w-full">
+
+    <div class="flex gap-2 justify-between items-center">
+      <p class="mr-4 text-accent font-semibold">Filtrar por:</p>
+      <input
+        type="text"
+        class="input input-bordered w-full max-w-xs flex-1"
+        placeholder="Buscar"
+        #txtSearch
+        (input)="searchQuery.set(txtSearch.value)"
+      >
+    </div>
+
+    <div class="flex gap-2 justify-between items-center">
+      <p class="mr-4 text-secondary font-semibold">Ordenar por:</p>
+      <button (click)="sortBy.set('name')" class="btn btn-primary">Nombre</button>
+      <button (click)="sortBy.set('canFly')" class="btn btn-accent">Puede volar</button>
+      <button (click)="sortBy.set('color')" class="btn btn-secondary">Color</button>
+      <button (click)="sortBy.set('creator')" class="btn btn-info">Creador</button>
+    </div>
+
   </div>
 </section>
 
@@ -39,7 +60,7 @@
     </thead>
     <tbody>
 
-      @for (hero of heroes(); track hero.id; let i = $index) {
+      @for (hero of heroes() | heroFilter:searchQuery() | heroSortBy:sortBy(); track hero.id; let i = $index) {
 
         <tr>
           <td>{{i + 1}}</td>
